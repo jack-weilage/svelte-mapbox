@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { MapContext, SourceContext } from '$lib/context'
+	import type { MapContext, SourceContext } from '../context.js'
 	import type { AnySourceData, MapSourceDataEvent, Source } from 'mapbox-gl'
 
-	import { mapContextKey, sourceContextKey } from '$lib/context'
+	import { mapContextKey, sourceContextKey } from '../context.js'
 	import { getContext, onMount, setContext } from 'svelte'
 
 	export let id: string

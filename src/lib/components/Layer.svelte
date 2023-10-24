@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { MapContext, SourceContext, LayerContext } from '$lib/context'
+	import type { MapContext, SourceContext, LayerContext } from '../context.js'
 	import type { AnyLayer } from 'mapbox-gl'
-	import { mapContextKey, sourceContextKey, layerContextKey } from '$lib/context'
+
+	import { mapContextKey, sourceContextKey, layerContextKey } from '../context.js'
 	import { getContext, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
 

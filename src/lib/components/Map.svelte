@@ -1,11 +1,11 @@
 <script lang="ts">
 	import 'mapbox-gl/dist/mapbox-gl.css'
 
-	import type { MapContext } from '$lib/context'
+	import type { MapContext } from '../context.js'
 	import type { MapboxEvent, MapboxOptions } from 'mapbox-gl'
 
 	import { Map } from 'mapbox-gl'
-	import { mapContextKey } from '$lib/context'
+	import { mapContextKey } from '../context.js'
 	import { onMount, setContext, createEventDispatcher } from 'svelte'
 	import { writable } from 'svelte/store'
 

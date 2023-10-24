@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { markerContextKey, type MarkerContext } from '$lib/context'
+	import type { MarkerContext } from '../context.js'
 	import type { LngLatLike, PopupOptions } from 'mapbox-gl'
 
+	import { markerContextKey } from '../context.js'
 	import { Popup } from 'mapbox-gl'
 	import { getContext, onMount, createEventDispatcher } from 'svelte'
 

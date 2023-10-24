@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { MapContext, MarkerContext } from '$lib/context'
+	import type { MapContext, MarkerContext } from '../context.js'
 	import type { LngLatLike, MarkerOptions } from 'mapbox-gl'
 
-	import { mapContextKey, markerContextKey } from '$lib/context'
+	import { mapContextKey, markerContextKey } from '../context.js'
 	import { Marker } from 'mapbox-gl'
 	import { getContext, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
