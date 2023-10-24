@@ -3,7 +3,18 @@
 	"singleQuote": true,
 	"semi": false,
 	"printWidth": 100,
-	"plugins": ["prettier-plugin-svelte"],
-	"pluginSearchDirs": ["."],
-	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
+	"plugins": [
+		"prettier-plugin-svelte",
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-packagejson"
+	],
+	"overrides": [
+		{
+			"files": "*.svelte",
+			"options": {
+				"parser": "svelte",
+				"organizeImportsSkipDestructiveCodeActions": true
+			}
+		}
+	]
 }
