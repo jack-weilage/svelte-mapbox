@@ -29,4 +29,6 @@
 	})
 </script>
 
-<slot layer={layerStore} />
+{#if $layerStore}
+	<slot layer={layerStore} />
+{/if}
