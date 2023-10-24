@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { MarkerContext } from '../context.js'
+	import type { MapContext, MarkerContext } from '../context.js'
 	import type { LngLatLike, PopupOptions } from 'mapbox-gl'
 
-	import { markerContextKey } from '../context.js'
+	import { mapContextKey, markerContextKey } from '../context.js'
 	import { Popup } from 'mapbox-gl'
 	import { getContext, onMount, createEventDispatcher } from 'svelte'
 
@@ -14,6 +14,7 @@
 	const dispatch = createEventDispatcher()
 
 	let popupInstance: Popup
+	const { mapStore } = getContext<MapContext>(mapContextKey)
 	const { markerStore } = getContext<MarkerContext | undefined>(markerContextKey) ?? {
 		markerStore: undefined,
 	}
@@ -42,7 +43,12 @@
 
 	onMount(() => {
 		popupInstance = new Popup(popup)
-		$markerStore?.setPopup(popupInstance)
+
+		if ($markerStore) {
+			$markerStore.setPopup(popupInstance)
+		} else {
+			popupInstance.addTo($mapStore)
+		}
 
 		const onOpen = (ev: unknown) => dispatch('open', ev as { target: Popup })
 		const onClose = (ev: unknown) => dispatch('close', ev as { target: Popup })
