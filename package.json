@@ -24,9 +24,11 @@
 		"lint": "prettier --cache --check . && eslint .",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"prepublishOnly": "npm run package",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"release": "bun run build && changeset publish"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.26.2",
 		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/kit": "^1.27.1",
 		"@sveltejs/package": "^2.2.2",
