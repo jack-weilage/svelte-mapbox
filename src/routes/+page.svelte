@@ -5,6 +5,7 @@
 	import { Layer, Map, Source } from '$lib/index.js'
 	import { NavigationControl, ScaleControl } from 'mapbox-gl'
 	import CityPopup from './CityPopup.svelte'
+	import LayerControl from './LayerControl.svelte'
 </script>
 
 <div class="maps">
@@ -13,7 +14,7 @@
 
 		<Map
 			style="height: 80vh"
-			map={{
+			options={{
 				accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
 				style: 'mapbox://styles/mapbox/streets-v12',
 				center: [12.550343, 55.665957],
@@ -26,7 +27,7 @@
 			<Marker lngLat={[12.550343, 55.665957]}>
 				<Popup>Blue marker popup</Popup>
 			</Marker>
-			<Marker lngLat={[12.65147, 55.608166]} marker={{ color: 'black', rotation: 45 }}>
+			<Marker lngLat={[12.65147, 55.608166]} options={{ color: 'black', rotation: 45 }}>
 				<Popup>Black tilted marker popup</Popup>
 			</Marker>
 		</Map>
@@ -36,21 +37,22 @@
 
 		<Map
 			style="height: 80vh"
-			map={{
+			options={{
 				accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
 				style: 'mapbox://styles/mapbox/streets-v12',
 				attributionControl: false,
 			}}
 		>
+			<LayerControl />
 			<Source
 				id="points"
-				source={{
+				options={{
 					type: 'geojson',
 					data: 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_populated_places_simple.geojson',
 				}}
 			>
 				<Layer
-					layer={{
+					options={{
 						id: 'points',
 						type: 'circle',
 						paint: { 'circle-color': 'red' },
