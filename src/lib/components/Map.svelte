@@ -1,20 +1,20 @@
 <script lang="ts">
 	import 'mapbox-gl/dist/mapbox-gl.css'
 
-	import type { MapContext } from '../context.js'
 	import type { MapboxEvent, MapboxOptions } from 'mapbox-gl'
+	import type { MapContext } from '../context.js'
 
 	import { Map } from 'mapbox-gl'
-	import { mapContextKey } from '../context.js'
-	import { onMount, setContext, createEventDispatcher } from 'svelte'
+	import { createEventDispatcher, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
+	import { mapContextKey } from '../context.js'
 
 	const dispatch = createEventDispatcher()
-
-	export let map: Omit<MapboxOptions, 'container'> = {}
-
 	const { mapStore } = setContext<MapContext>(mapContextKey, { mapStore: writable() })
 	let container: HTMLDivElement
+
+	export let options: Omit<MapboxOptions, 'container'> = {}
+	export const map = mapStore
 
 	onMount(() => {
 		function onLoad(ev: MapboxEvent) {
@@ -23,7 +23,7 @@
 			$mapStore = ev.target
 		}
 
-		new Map({ container, ...map }).on('load', onLoad)
+		new Map({ container, ...options }).on('load', onLoad)
 
 		return () => {
 			$mapStore?.off('load', onLoad)
@@ -33,6 +33,6 @@
 
 <div bind:this={container} {...$$restProps}>
 	{#if $mapStore}
-		<slot element={container} map={$mapStore} />
+		<slot />
 	{/if}
 </div>

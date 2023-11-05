@@ -1,28 +1,29 @@
 <script lang="ts">
-	import type { MapContext, MarkerContext } from '../context.js'
 	import type { LngLatLike, MarkerOptions } from 'mapbox-gl'
+	import type { MapContext, MarkerContext } from '../context.js'
 
-	import { mapContextKey, markerContextKey } from '../context.js'
 	import { Marker } from 'mapbox-gl'
 	import { getContext, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
-
-	export let lngLat: LngLatLike
-	export let marker: MarkerOptions = {}
+	import { mapContextKey, markerContextKey } from '../context.js'
 
 	const { mapStore } = getContext<MapContext>(mapContextKey)
 	const { markerStore } = setContext<MarkerContext>(markerContextKey, { markerStore: writable() })
 
+	export let lngLat: LngLatLike
+	export let options: MarkerOptions = {}
+	export const marker = markerStore
+
 	$: $markerStore?.setLngLat(lngLat)
-	$: $markerStore?.setDraggable(marker.draggable ?? false)
-	$: $markerStore?.setOccludedOpacity(marker.occludedOpacity ?? 0.2)
-	$: $markerStore?.setOffset(marker.offset ?? [0, 0])
-	$: $markerStore?.setPitchAlignment(marker.pitchAlignment ?? 'auto')
-	$: $markerStore?.setRotation(marker.rotation ?? 0)
-	$: $markerStore?.setRotationAlignment(marker.rotationAlignment ?? 'auto')
+	$: $markerStore?.setDraggable(options.draggable ?? false)
+	$: $markerStore?.setOccludedOpacity(options.occludedOpacity ?? 0.2)
+	$: $markerStore?.setOffset(options.offset ?? [0, 0])
+	$: $markerStore?.setPitchAlignment(options.pitchAlignment ?? 'auto')
+	$: $markerStore?.setRotation(options.rotation ?? 0)
+	$: $markerStore?.setRotationAlignment(options.rotationAlignment ?? 'auto')
 
 	onMount(() => {
-		$markerStore = new Marker(marker).setLngLat(lngLat).addTo($mapStore)
+		$markerStore = new Marker(options).setLngLat(lngLat).addTo($mapStore)
 
 		return () => {
 			$markerStore.remove()
@@ -31,5 +32,5 @@
 </script>
 
 {#if $markerStore}
-	<slot marker={$markerStore} />
+	<slot />
 {/if}

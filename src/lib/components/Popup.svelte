@@ -1,74 +1,75 @@
 <script lang="ts">
-	import type { MapContext, MarkerContext } from '../context.js'
 	import type { LngLatLike, PopupOptions } from 'mapbox-gl'
+	import type { MapContext, MarkerContext } from '../context.js'
 
-	import { mapContextKey, markerContextKey } from '../context.js'
 	import { Popup } from 'mapbox-gl'
-	import { getContext, onMount, createEventDispatcher } from 'svelte'
-
-	export let lngLat: LngLatLike = undefined!
-	export let content: HTMLElement | string = undefined!
-	let element: HTMLElement
-	export let popup: PopupOptions = {}
+	import { createEventDispatcher, getContext, onMount } from 'svelte'
+	import { writable } from 'svelte/store'
+	import { mapContextKey, markerContextKey } from '../context.js'
 
 	const dispatch = createEventDispatcher()
 
-	let popupInstance: Popup
 	const { mapStore } = getContext<MapContext>(mapContextKey)
 	const { markerStore } = getContext<MarkerContext | undefined>(markerContextKey) ?? {
 		markerStore: undefined,
 	}
+	let popupStore = writable<Popup>()
+	let element: HTMLElement
 
-	$: lngLat && popupInstance?.setLngLat(lngLat)
-	$: popupInstance?.setMaxWidth(popup.maxWidth ?? '240px')
+	export let lngLat: LngLatLike = undefined!
+	export let content: HTMLElement | string = undefined!
+	export let options: PopupOptions = {}
+	export const popup = popupStore
+
+	$: lngLat && $popupStore?.setLngLat(lngLat)
+	$: $popupStore?.setMaxWidth(options.maxWidth ?? '240px')
 	$: typeof content === 'string'
-		? popupInstance?.setHTML(content)
-		: popupInstance?.setDOMContent(content ?? element)
-	$: popupInstance?.setOffset(popup.offset)
+		? $popupStore?.setHTML(content)
+		: $popupStore?.setDOMContent(content ?? element)
+	$: $popupStore?.setOffset(options.offset)
 
-	let lastClasses = popup.className ?? ''
+	let lastClasses = options.className ?? ''
 	$: {
 		const oldClassList = lastClasses.split(' ')
-		const newClassList = (popup.className ?? '').split(' ')
+		const newClassList = (options.className ?? '').split(' ')
 
-		popupInstance?.addClassName(
-			newClassList.filter((className) => !oldClassList.includes(className)).join(' ')
+		$popupStore?.addClassName(
+			newClassList.filter((className) => !oldClassList.includes(className)).join(' '),
 		)
-		popupInstance?.removeClassName(
-			oldClassList.filter((className) => !newClassList.includes(className)).join(' ')
+		$popupStore?.removeClassName(
+			oldClassList.filter((className) => !newClassList.includes(className)).join(' '),
 		)
 
-		lastClasses = popup.className ?? ''
+		lastClasses = options.className ?? ''
 	}
 
 	onMount(() => {
-		popupInstance = new Popup(popup)
+		$popupStore = new Popup(options)
 
+		// If the popup is inside a marker, add it to the marker
 		if ($markerStore) {
-			$markerStore.setPopup(popupInstance)
+			$markerStore.setPopup($popupStore)
 		} else {
-			popupInstance.addTo($mapStore)
+			$popupStore.addTo($mapStore)
 		}
 
 		const onOpen = (ev: unknown) => dispatch('open', ev as { target: Popup })
 		const onClose = (ev: unknown) => dispatch('close', ev as { target: Popup })
 
-		popupInstance.on('open', onOpen)
-		popupInstance.on('close', onClose)
+		$popupStore.on('open', onOpen)
+		$popupStore.on('close', onClose)
 
 		return () => {
-			popupInstance.off('open', onOpen)
-			popupInstance.off('close', onClose)
+			$popupStore.off('open', onOpen)
+			$popupStore.off('close', onClose)
 
-			popupInstance.remove()
+			$popupStore.remove()
 		}
 	})
 </script>
 
 {#if !content}
 	<div bind:this={element} {...$$restProps}>
-		<slot {element} popup={popupInstance} />
+		<slot />
 	</div>
-{:else}
-	<slot element={popupInstance?.getElement()} popup={popupInstance} />
 {/if}

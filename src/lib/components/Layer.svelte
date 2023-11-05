@@ -1,34 +1,35 @@
 <script lang="ts">
-	import type { MapContext, SourceContext, LayerContext } from '../context.js'
 	import type { AnyLayer } from 'mapbox-gl'
+	import type { LayerContext, MapContext, SourceContext } from '../context.js'
 
-	import { mapContextKey, sourceContextKey, layerContextKey } from '../context.js'
 	import { getContext, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
-
-	export let layer: Omit<AnyLayer, 'source'>
+	import { layerContextKey, mapContextKey, sourceContextKey } from '../context.js'
 
 	const { mapStore } = getContext<MapContext>(mapContextKey)
 	const { sourceID } = getContext<SourceContext>(sourceContextKey)
 	const { layerStore } = setContext<LayerContext>(layerContextKey, { layerStore: writable() })
 
+	export let options: Omit<AnyLayer, 'source'>
+	export const layer = layerStore
+
 	onMount(() => {
 		//@ts-expect-error - source doesn't exist on some layers
 		$mapStore.addLayer({
 			source: sourceID,
-			...layer,
+			...options,
 		})
-		$layerStore = $mapStore.getLayer(layer.id)
+		$layerStore = $mapStore.getLayer(options.id)
 
 		return () => {
 			// The parent source may have already removed this layer before destruction.
-			if ($mapStore.getLayer(layer.id)) {
-				$mapStore.removeLayer(layer.id)
+			if ($mapStore.getLayer(options.id)) {
+				$mapStore.removeLayer(options.id)
 			}
 		}
 	})
 </script>
 
 {#if $layerStore}
-	<slot layer={layerStore} />
+	<slot />
 {/if}

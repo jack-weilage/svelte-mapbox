@@ -1,26 +1,28 @@
 <script lang="ts">
-	import type { MapContext, SourceContext } from '../context.js'
 	import type { AnySourceData, MapSourceDataEvent, Source } from 'mapbox-gl'
+	import type { MapContext, SourceContext } from '../context.js'
 
-	import { mapContextKey, sourceContextKey } from '../context.js'
 	import { getContext, onMount, setContext } from 'svelte'
-
-	export let id: string
-	export let source: AnySourceData
+	import { writable } from 'svelte/store'
+	import { mapContextKey, sourceContextKey } from '../context.js'
 
 	const { mapStore } = getContext<MapContext>(mapContextKey)
+	const sourceStore = writable<Source>()
+
+	export let id: string
+	export let options: AnySourceData
+	export const source = $sourceStore
+
 	setContext<SourceContext>(sourceContextKey, { sourceID: id })
 
-	let sourceInstance: Source
-
-	$: if (sourceInstance?.type === 'geojson' && source.type === 'geojson') {
+	$: if ($sourceStore?.type === 'geojson' && options.type === 'geojson') {
 		//@ts-expect-error - Bad types! Not my problem!
 		// console.log(sourceInstance)
-		sourceInstance.setData(source.data)
+		$sourceStore.setData(options.data)
 	}
 
 	onMount(() => {
-		$mapStore.addSource(id, source)
+		$mapStore.addSource(id, options)
 
 		function onSourceData({ sourceId }: MapSourceDataEvent) {
 			if (sourceId !== id) {
@@ -28,7 +30,7 @@
 			}
 
 			$mapStore.off('sourcedata', onSourceData)
-			sourceInstance = $mapStore.getSource(id)
+			$sourceStore = $mapStore.getSource(id)
 		}
 
 		$mapStore.on('sourcedata', onSourceData)
@@ -50,6 +52,6 @@
 	})
 </script>
 
-{#if sourceInstance}
-	<slot source={sourceInstance} />
+{#if $sourceStore}
+	<slot />
 {/if}
