@@ -1,58 +1,55 @@
-# create-svelte
+# svelte-mapbox
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Components
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+### Proxy Components
 
-## Creating a project
+- Map ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/map/))
+- Source ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/sources/))
+- Layer ([Mapbox reference](https://docs.mapbox.com/style-spec/reference/layers/))
 
-If you're seeing this, you've probably already done this step. Congrats!
+### DOM Components
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- Marker ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker))
+- Popup ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/markers/#popup))
+- Control ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/markers/#icontrol))
 
-# create a new project in my-app
-npm create svelte@latest my-app
+## Getting Started
+
+Install via NPM/PNPM/Yarn/Bun:
+
+```sh
+npm install svelte-mapbox --save
 ```
 
-## Developing
+Import and use components:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```jsx
+<script>
+    import { Map, Source, Marker, Popup } from 'svelte-mapbox'
+</script>
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<Map options={{
+    accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN'
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [12.550343, 55.665957],
+    zoom: 8,
+}}>
+    <Marker lngLat={[12.550343, 55.665957]}>
+        <Popup>Blue marker popup</Popup>
+    </Marker>
+    <Marker lngLat={[12.65147, 55.608166]} options={{ color: 'black', rotation: 45 }}>
+        <Popup>Black tilted marker popup</Popup>
+    </Marker>
+</Map>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## API Design
 
-## Building
+`svelte-mapbox` attempts to stick as close as possible to the official Mapbox API, but there are some differences.
 
-To build your library:
+Generally, if you can add something to a `Map` object, you can import it as a component. If you can specify options for that thing, you can pass them as `options` to the component.
 
-```bash
-npm run package
-```
+If you can call a `set` method on an object, you can pass it as a prop. As an example, calling `setLngLat` can be replaced with the `lngLat` prop.
 
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+If you want to simply access the underlying object, you can use `bind:[component type]`. As an example, `bind:map` returns the `Map` object.
