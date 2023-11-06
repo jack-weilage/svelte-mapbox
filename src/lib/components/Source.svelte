@@ -11,7 +11,7 @@
 
 	export let id: string
 	export let options: AnySourceData
-	export const source = $sourceStore
+	export const source = sourceStore
 
 	setContext<SourceContext>(sourceContextKey, { sourceID: id })
 
