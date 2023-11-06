@@ -1,6 +1,12 @@
 {
 	"name": "svelte-mapbox",
 	"version": "0.1.0",
+	"keywords": [
+		"svelte",
+		"mapbox",
+		"map",
+		"sveltekit"
+	],
 	"type": "module",
 	"exports": {
 		".": {
