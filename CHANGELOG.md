@@ -1,5 +1,16 @@
 # svelte-mapbox
 
+## 0.2.0
+
+### Minor Changes
+
+- 54e2251: Add `Image` component
+
+### Patch Changes
+
+- d186709: Add MIT license
+- 3814ff3: Add repository information to package.json
+
 ## 0.1.0
 
 ### Minor Changes
