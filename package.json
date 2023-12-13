@@ -7,6 +7,10 @@
 		"map",
 		"sveltekit"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jack-weilage/svelte-mapbox.git"
+	},
 	"license": "MIT",
 	"type": "module",
 	"exports": {
