@@ -1,5 +1,4 @@
-// place files you want to import through the `$lib` alias in this folder.
-
+export { default as Image } from './components/Image.svelte'
 export { default as Layer } from './components/Layer.svelte'
 export { default as Map } from './components/Map.svelte'
 export { default as Marker } from './components/Marker.svelte'
