@@ -4,11 +4,16 @@
 
 ### Proxy Components
 
+Proxy components act as convenient wrappers for necessary boilerplate.
+
+- Image ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/map/#map#addimage))
 - Map ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/map/))
 - Source ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/sources/))
 - Layer ([Mapbox reference](https://docs.mapbox.com/style-spec/reference/layers/))
 
 ### DOM Components
+
+DOM components add necessary DOM elements and bind them to `mapbox-gl`.
 
 - Marker ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker))
 - Popup ([Mapbox reference](https://docs.mapbox.com/mapbox-gl-js/api/markers/#popup))
@@ -46,7 +51,7 @@ Import and use components:
 
 ## API Design
 
-`svelte-mapbox` attempts to stick as close as possible to the official Mapbox API, but there are some differences.
+`svelte-mapbox` attempts to stick as close as possible to the official Mapbox API, but there are some differences. If you know `mapbox-gl`, you should know `svelte-mapbox`.
 
 Generally, if you can add something to a `Map` object, you can import it as a component. If you can specify options for that thing, you can pass them as `options` to the component.
 
