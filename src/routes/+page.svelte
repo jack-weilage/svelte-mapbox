@@ -3,7 +3,7 @@
 	import Marker from '$lib/components/Marker.svelte'
 	import Popup from '$lib/components/Popup.svelte'
 	import { Layer, Map, Source } from '$lib/index.js'
-	import { NavigationControl, ScaleControl } from 'mapbox-gl'
+	import Mapbox from 'mapbox-gl'
 	import CityPopup from './CityPopup.svelte'
 	import LayerControl from './LayerControl.svelte'
 </script>
@@ -22,8 +22,8 @@
 				attributionControl: false,
 			}}
 		>
-			<Control position="bottom-left" control={new ScaleControl()} />
-			<Control position="bottom-right" control={new NavigationControl()} />
+			<Control position="bottom-left" control={new Mapbox.ScaleControl()} />
+			<Control position="bottom-right" control={new Mapbox.NavigationControl()} />
 			<Marker lngLat={[12.550343, 55.665957]}>
 				<Popup>Blue marker popup</Popup>
 			</Marker>

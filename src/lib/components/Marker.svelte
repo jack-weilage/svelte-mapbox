@@ -2,7 +2,7 @@
 	import type { LngLatLike, MarkerOptions } from 'mapbox-gl'
 	import type { MapContext, MarkerContext } from '../context.js'
 
-	import { Marker } from 'mapbox-gl'
+    import Mapbox from 'mapbox-gl'
 	import { getContext, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
 	import { mapContextKey, markerContextKey } from '../context.js'
@@ -23,7 +23,7 @@
 	$: $markerStore?.setRotationAlignment(options.rotationAlignment ?? 'auto')
 
 	onMount(() => {
-		$markerStore = new Marker(options).setLngLat(lngLat).addTo($mapStore)
+		$markerStore = new Mapbox.Marker(options).setLngLat(lngLat).addTo($mapStore)
 
 		return () => {
 			$markerStore.remove()

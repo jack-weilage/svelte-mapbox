@@ -4,7 +4,7 @@
 	import type { MapboxEvent, MapboxOptions } from 'mapbox-gl'
 	import type { MapContext } from '../context.js'
 
-	import { Map } from 'mapbox-gl'
+	import Mapbox from 'mapbox-gl'
 	import { createEventDispatcher, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
 	import { mapContextKey } from '../context.js'
@@ -23,7 +23,7 @@
 			$mapStore = ev.target
 		}
 
-		new Map({ container, ...options }).on('load', onLoad)
+		new Mapbox.Map({ container, ...options }).on('load', onLoad)
 
 		return () => {
 			$mapStore?.off('load', onLoad)

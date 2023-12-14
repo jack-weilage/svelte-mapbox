@@ -43,13 +43,13 @@
 		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/kit": "^1.27.1",
 		"@sveltejs/package": "^2.2.2",
-		"@types/mapbox-gl": "^2.7.17",
+		"@types/mapbox-gl": "^2.7.19",
 		"@typescript-eslint/eslint-plugin": "^6.9.0",
 		"@typescript-eslint/parser": "^6.9.0",
 		"eslint": "^8.52.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.34.0",
-		"mapbox-gl": "^2.15.0",
+		"mapbox-gl": "^3.0.1",
 		"prettier": "^3.0.3",
 		"prettier-plugin-organize-imports": "^3.2.3",
 		"prettier-plugin-packagejson": "^2.4.6",
@@ -58,8 +58,8 @@
 		"svelte": "^4.2.2",
 		"svelte-check": "^3.5.2",
 		"tslib": "^2.6.2",
-		"typescript": "^5.2.2",
-		"vite": "^4.5.0"
+		"typescript": "^5.3.3",
+		"vite": "^5.0.8"
 	},
 	"peerDependencies": {
 		"svelte": "^4.0.0"

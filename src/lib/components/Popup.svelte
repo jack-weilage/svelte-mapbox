@@ -2,7 +2,8 @@
 	import type { LngLatLike, PopupOptions } from 'mapbox-gl'
 	import type { MapContext, MarkerContext } from '../context.js'
 
-	import { Popup } from 'mapbox-gl'
+	// import { Popup } from 'mapbox-gl'
+	import Mapbox from 'mapbox-gl'
 	import { createEventDispatcher, getContext, onMount } from 'svelte'
 	import { writable } from 'svelte/store'
 	import { mapContextKey, markerContextKey } from '../context.js'
@@ -13,7 +14,7 @@
 	const { markerStore } = getContext<MarkerContext | undefined>(markerContextKey) ?? {
 		markerStore: undefined,
 	}
-	let popupStore = writable<Popup>()
+	let popupStore = writable<Mapbox.Popup>()
 	let element: HTMLElement
 
 	export let lngLat: LngLatLike = undefined!
@@ -44,7 +45,7 @@
 	}
 
 	onMount(() => {
-		$popupStore = new Popup(options)
+		$popupStore = new Mapbox.Popup(options)
 
 		// If the popup is inside a marker, add it to the marker
 		if ($markerStore) {
@@ -53,8 +54,8 @@
 			$popupStore.addTo($mapStore)
 		}
 
-		const onOpen = (ev: unknown) => dispatch('open', ev as { target: Popup })
-		const onClose = (ev: unknown) => dispatch('close', ev as { target: Popup })
+		const onOpen = (ev: unknown) => dispatch('open', ev as { target: Mapbox.Popup })
+		const onClose = (ev: unknown) => dispatch('close', ev as { target: Mapbox.Popup })
 
 		$popupStore.on('open', onOpen)
 		$popupStore.on('close', onClose)
