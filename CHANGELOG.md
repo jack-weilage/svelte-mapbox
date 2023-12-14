@@ -1,5 +1,15 @@
 # svelte-mapbox
 
+## 0.3.0
+
+### Minor Changes
+
+- 6f6bc48: Upgrade `mapbox-gl` to `^3.0.0`
+
+### Patch Changes
+
+- 5f75ea3: Update all minor dependencies
+
 ## 0.2.1
 
 ### Patch Changes
