@@ -2,7 +2,7 @@
 	import type { LngLatLike, MarkerOptions } from 'mapbox-gl'
 	import type { MapContext, MarkerContext } from '../context.js'
 
-    import Mapbox from 'mapbox-gl'
+	import Mapbox from 'mapbox-gl'
 	import { getContext, onMount, setContext } from 'svelte'
 	import { writable } from 'svelte/store'
 	import { mapContextKey, markerContextKey } from '../context.js'
