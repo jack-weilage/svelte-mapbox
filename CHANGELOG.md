@@ -1,5 +1,11 @@
 # svelte-mapbox
 
+## 0.4.0
+
+### Minor Changes
+
+- 585bbe7: Actually re-export the `<Control />` component (this took me nearly 2 months to notice)
+
 ## 0.3.1
 
 ### Patch Changes
