@@ -10,33 +10,33 @@
 	const { mapStore } = getContext<MapContext>(mapContextKey)
 
 	export let id: string
-	export let image: ImageArguments[1] | string | URL
+	export let src: ImageArguments[1] | string | URL
 	export let options: ImageArguments[2] = undefined
 
 	async function update_image(
 		id: string,
-		image: ImageArguments[1] | string | URL,
+		src: ImageArguments[1] | string | URL,
 		options: ImageArguments[2],
 	) {
-		if (typeof image === 'string' || image instanceof URL) {
-			image = await new Promise<HTMLImageElement>((resolve, reject) => {
+		if (typeof src === 'string' || src instanceof URL) {
+			src = await new Promise<HTMLImageElement>((resolve, reject) => {
 				const img = new Image()
 				img.addEventListener('load', () => resolve(img))
 				img.addEventListener('error', reject)
 
-				img.src = image.toString()
+				img.src = src.toString()
 			})
 		}
 
 		if ($mapStore.hasImage(id)) {
-			$mapStore.updateImage(id, image)
+			$mapStore.updateImage(id, src)
 			return
 		}
 
-		$mapStore.addImage(id, image, options)
+		$mapStore.addImage(id, src, options)
 	}
 
-	$: update_image(id, image, options)
+	$: update_image(id, src, options)
 
 	onDestroy(() => {
 		$mapStore.removeImage(id)
