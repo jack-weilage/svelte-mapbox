@@ -1,5 +1,12 @@
 # svelte-mapbox
 
+## 0.3.1
+
+### Patch Changes
+
+- eaa3b84: `options` is now optional (ha) for `<Image />`
+- 0e7c061: `image` parameter is now `src` for `<Image />`
+
 ## 0.3.0
 
 ### Minor Changes
