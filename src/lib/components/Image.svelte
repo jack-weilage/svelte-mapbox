@@ -11,7 +11,7 @@
 
 	export let id: string
 	export let image: ImageArguments[1] | string | URL
-	export let options: ImageArguments[2]
+	export let options: ImageArguments[2] = undefined
 
 	async function update_image(
 		id: string,
