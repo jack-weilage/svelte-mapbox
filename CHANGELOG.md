@@ -1,5 +1,11 @@
 # svelte-mapbox
 
+## 0.4.1
+
+### Patch Changes
+
+- 80fe7ca: Fixed a rather annoying bug with `<Layer />` where the `options` prop wouldn't recognize the `paint` property (Fixes #8)
+
 ## 0.4.0
 
 ### Minor Changes
