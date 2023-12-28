@@ -10,12 +10,12 @@
 	const { sourceID } = getContext<SourceContext>(sourceContextKey)
 	const { layerStore } = setContext<LayerContext>(layerContextKey, { layerStore: writable() })
 
-	export let options: Omit<AnyLayer, 'source'>
+	export let options: AnyLayer
 	export const layer = layerStore
 
 	onMount(() => {
-		//@ts-expect-error - source doesn't exist on some layers
 		$mapStore.addLayer({
+			//@ts-expect-error - source doesn't exist on some layers
 			source: sourceID,
 			...options,
 		})
