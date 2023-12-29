@@ -2,7 +2,6 @@
 	import type { LngLatLike, PopupOptions } from 'mapbox-gl'
 	import type { MapContext, MarkerContext } from '../context.js'
 
-	// import { Popup } from 'mapbox-gl'
 	import Mapbox from 'mapbox-gl'
 	import { createEventDispatcher, getContext, onMount } from 'svelte'
 	import { writable } from 'svelte/store'

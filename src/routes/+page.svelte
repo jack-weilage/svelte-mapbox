@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Control from '$lib/components/Control.svelte'
-	import Marker from '$lib/components/Marker.svelte'
-	import Popup from '$lib/components/Popup.svelte'
-	import { Layer, Map, Source } from '$lib/index.js'
+	import { PUBLIC_MAPBOX_TOKEN } from '$env/static/public'
+
+	import { Control, Marker, Popup, Layer, Map, Source } from '$lib/index.js'
 	import Mapbox from 'mapbox-gl'
 	import CityPopup from './CityPopup.svelte'
 	import LayerControl from './LayerControl.svelte'
@@ -15,7 +14,7 @@
 		<Map
 			style="height: 80vh"
 			options={{
-				accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
+				accessToken: PUBLIC_MAPBOX_TOKEN,
 				style: 'mapbox://styles/mapbox/streets-v12',
 				center: [12.550343, 55.665957],
 				zoom: 8,
@@ -38,7 +37,7 @@
 		<Map
 			style="height: 80vh"
 			options={{
-				accessToken: import.meta.env.VITE_MAPBOX_TOKEN,
+				accessToken: PUBLIC_MAPBOX_TOKEN,
 				style: 'mapbox://styles/mapbox/streets-v12',
 				attributionControl: false,
 			}}

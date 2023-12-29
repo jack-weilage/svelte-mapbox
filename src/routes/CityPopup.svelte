@@ -40,9 +40,11 @@
 		}
 	}
 	onMount(() => {
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises -- This will work, so whatever
 		$mapStore.on('click', $layerStore.id, onClick)
 
 		return () => {
+			// eslint-disable-next-line @typescript-eslint/no-misused-promises -- This will work, so whatever
 			$mapStore.off('click', $layerStore.id, onClick)
 		}
 	})

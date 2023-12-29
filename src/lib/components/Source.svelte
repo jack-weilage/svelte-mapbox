@@ -15,10 +15,13 @@
 
 	setContext<SourceContext>(sourceContextKey, { sourceID: id })
 
+	interface HackyGeoJSONSource {
+		setData: (data: object | string | undefined) => void
+	}
+
 	$: if ($sourceStore?.type === 'geojson' && options.type === 'geojson') {
-		//@ts-expect-error - Bad types! Not my problem!
-		// console.log(sourceInstance)
-		$sourceStore.setData(options.data)
+		// HACK: Mapbox types don't narrow to GeoJSONSource, and the signature isn't correct there anyways. Just invent our own function and hope it works.
+		;($sourceStore as unknown as HackyGeoJSONSource).setData(options.data)
 	}
 
 	onMount(() => {

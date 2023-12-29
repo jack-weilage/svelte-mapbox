@@ -24,7 +24,8 @@
 				img.addEventListener('load', () => resolve(img))
 				img.addEventListener('error', reject)
 
-				img.src = src.toString()
+				// TODO: TypeScript seems to forget that src can only be a string or URL
+				img.src = (src as string | URL).toString()
 			})
 		}
 
@@ -36,6 +37,7 @@
 		$mapStore.addImage(id, src, options)
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-floating-promises -- If this fails, something went more wrong than I can deal with.
 	$: update_image(id, src, options)
 
 	onDestroy(() => {
