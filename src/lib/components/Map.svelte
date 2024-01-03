@@ -33,6 +33,6 @@
 
 <div bind:this={container} {...$$restProps}>
 	{#if $mapStore}
-		<slot />
+		<slot {map} />
 	{/if}
 </div>

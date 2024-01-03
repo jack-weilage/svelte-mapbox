@@ -70,6 +70,6 @@
 
 {#if !content}
 	<div bind:this={element} {...$$restProps}>
-		<slot />
+		<slot {popup} />
 	</div>
 {/if}

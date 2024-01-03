@@ -56,5 +56,5 @@
 </script>
 
 {#if $sourceStore}
-	<slot />
+	<slot {source} />
 {/if}

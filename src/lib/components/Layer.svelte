@@ -31,5 +31,5 @@
 </script>
 
 {#if $layerStore}
-	<slot />
+	<slot {layer} />
 {/if}

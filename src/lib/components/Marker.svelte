@@ -32,5 +32,5 @@
 </script>
 
 {#if $markerStore}
-	<slot />
+	<slot {marker} />
 {/if}
