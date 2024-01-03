@@ -1,5 +1,11 @@
 # svelte-mapbox
 
+## 0.5.0
+
+### Minor Changes
+
+- 8eaf24c: `layer`, `map`, `marker`, `popup`, and `source` stores are now available via `let:` props.
+
 ## 0.4.1
 
 ### Patch Changes
