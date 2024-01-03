@@ -11,15 +11,15 @@ body:
 
   - type: input
     attributes:
-      label: Affected Version
-      description: Please enter the exact version, as reported by your package manager.
+      label: System Information
+      description: Please enter the output of `bun x envinfo --system --npmPackages svelte,svelte-mapbox,vite,rollup,webpack --binaries --browsers`
     validations:
       required: true
 
   - type: textarea
     attributes:
       label: Reproduction Steps
-      description: Explain the steps required to trigger the bug, alongside a demonstrative code snippet
+      description: Explain the steps required to trigger the bug, alongside a demonstrative code snippet or reproduction repository
     validations:
       required: true
 
