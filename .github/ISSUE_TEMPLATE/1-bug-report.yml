@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report a bug that needs to be fixed
+labels:
+  - bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to svelte-mapbox!
+
+  - type: input
+    attributes:
+      label: Affected Version
+      description: Please enter the exact version, as reported by your package manager.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproduction Steps
+      description: Explain the steps required to trigger the bug, alongside a demonstrative code snippet
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Result
+      description: Describe what is expected to occur/be returned
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual Result
+      description: Describe what actually occurs/is returned
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Severity
+      options:
+        - annoying
+        - blocking an upgrade
+        - blocking all usage
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: I have...
+      options:
+        - label: Searched for a similar issue
+        - label: Carefully and accurately filled out this form
+    validations:
+      required: true

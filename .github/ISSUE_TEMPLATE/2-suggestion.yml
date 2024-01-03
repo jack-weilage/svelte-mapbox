@@ -1,0 +1,49 @@
+name: Feature Suggestion
+description: Suggest a new feature or improvements to an old one
+labels:
+  - suggestion
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to svelte-mapbox!
+
+  - type: textarea
+    attributes:
+      label: Problem
+      description: What problem would this feature solve?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Solution
+      description: How do you think this problem should be solved?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Alternatives
+      description: What alternative solutions have you considered (if any)?
+
+  - type: dropdown
+    attributes:
+      label: Importance
+      description: How important/neccesary is this feature?
+      options:
+        - nice to have
+        - would make usage easier
+        - absolute must-have
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: I have...
+      options:
+        - label: Searched for a similar issue
+        - label: Carefully and accurately filled out this form
+    validations:
+      required: true
