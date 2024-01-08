@@ -13,7 +13,7 @@
 	export let src: ImageArguments[1] | string | URL
 	export let options: ImageArguments[2] = undefined
 
-	async function update_image(
+	async function updateImage(
 		id: string,
 		src: ImageArguments[1] | string | URL,
 		options: ImageArguments[2],
@@ -37,8 +37,7 @@
 		$mapStore.addImage(id, src, options)
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises -- If this fails, something went more wrong than I can deal with.
-	$: update_image(id, src, options)
+	$: void updateImage(id, src, options)
 
 	onDestroy(() => {
 		$mapStore.removeImage(id)
