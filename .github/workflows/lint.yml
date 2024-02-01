@@ -26,6 +26,9 @@ jobs:
     name: Build example project
     runs-on: ubuntu-latest
 
+    env:
+      PUBLIC_MAPBOX_TOKEN: ''
+
     steps:
       - uses: actions/checkout@v4
         with:
