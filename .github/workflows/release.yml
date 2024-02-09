@@ -23,5 +23,6 @@ jobs:
         with:
           publish: bun release
         env:
+          PUBLIC_MAPBOX_TOKEN: ''
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
