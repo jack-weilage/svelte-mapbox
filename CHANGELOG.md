@@ -1,5 +1,16 @@
 # svelte-mapbox
 
+## 0.6.0
+
+### Minor Changes
+
+- 08cc62f: Updated `mapbox-gl` to v3.1.2
+- ff9b702: feat: Add class `mapboxgl-ctrl-group` to `<Control />`. This should fix control buttons looking like they should.
+
+### Patch Changes
+
+- c0be7e2: Updated all minor dependencies
+
 ## 0.5.0
 
 ### Minor Changes
