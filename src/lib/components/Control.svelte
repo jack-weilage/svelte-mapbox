@@ -8,10 +8,10 @@
 	let element: HTMLDivElement
 
 	class SvelteControl implements IControl {
-		onAdd(): HTMLElement {
+		onAdd() {
 			return element
 		}
-		onRemove(): void {}
+		onRemove() {}
 	}
 
 	export let control: IControl = new SvelteControl()
@@ -29,7 +29,7 @@
 </script>
 
 {#if control instanceof SvelteControl}
-	<div class="mapboxgl-ctrl" {...$$restProps} bind:this={element}>
+	<div class="mapboxgl-ctrl mapboxgl-ctrl-group" {...$$restProps} bind:this={element}>
 		<slot />
 	</div>
 {/if}
